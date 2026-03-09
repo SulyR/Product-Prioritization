@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, ArrowUpDown } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
@@ -6,6 +6,29 @@ export default function RiceTable() {
     const [items, setItems] = useLocalStorage('pm-rice-items', []);
     const [newItemTitle, setNewItemTitle] = useState('');
     const [sortConfig, setSortConfig] = useState({ key: 'score', direction: 'desc' });
+
+    useEffect(() => {
+        const handleAddToFramework = (e) => {
+            const { item, targetFramework } = e.detail;
+            if (targetFramework === 'rice') {
+                setItems(prev => [
+                    ...prev,
+                    {
+                        id: crypto.randomUUID(),
+                        title: item.title,
+                        reach: 100,
+                        impact: 3,
+                        confidence: 80,
+                        effort: 2,
+                        score: calculateScore(100, 3, 80, 2)
+                    }
+                ]);
+            }
+        };
+
+        window.addEventListener('add-to-framework', handleAddToFramework);
+        return () => window.removeEventListener('add-to-framework', handleAddToFramework);
+    }, [setItems]);
 
     const calculateScore = (reach, impact, confidence, effort) => {
         // RICE = (Reach * Impact * Confidence%) / Effort

@@ -3,6 +3,7 @@ import { LayoutDashboard, CheckSquare, Target, BarChart2 } from 'lucide-react'
 import MoscowBoard from './components/MoscowBoard'
 import RiceTable from './components/RiceTable'
 import WeightedMatrix from './components/WeightedMatrix'
+import Sidebar from './components/Sidebar'
 
 function App() {
     const [activeTab, setActiveTab] = useState('moscow')
@@ -21,7 +22,7 @@ function App() {
     }
 
     return (
-        <>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
             <header className="app-header">
                 <div className="app-title">
                     <Target className="app-title-icon" size={28} />
@@ -52,10 +53,13 @@ function App() {
                 </nav>
             </header>
 
-            <main className="main-content">
-                {renderContent()}
-            </main>
-        </>
+            <div className="app-container">
+                <Sidebar activeFramework={activeTab} />
+                <main className="main-content">
+                    {renderContent()}
+                </main>
+            </div>
+        </div>
     )
 }
 

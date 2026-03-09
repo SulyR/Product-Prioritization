@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, GripVertical } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
@@ -13,6 +13,21 @@ export default function MoscowBoard() {
     const [items, setItems] = useLocalStorage('pm-moscow-items', []);
     const [newItemTitle, setNewItemTitle] = useState('');
     const [draggedItem, setDraggedItem] = useState(null);
+
+    useEffect(() => {
+        const handleAddToFramework = (e) => {
+            const { item, targetFramework } = e.detail;
+            if (targetFramework === 'moscow') {
+                setItems(prev => [
+                    ...prev,
+                    { id: crypto.randomUUID(), title: item.title, category: 'must' }
+                ]);
+            }
+        };
+
+        window.addEventListener('add-to-framework', handleAddToFramework);
+        return () => window.removeEventListener('add-to-framework', handleAddToFramework);
+    }, [setItems]);
 
     const addItem = (e) => {
         e.preventDefault();

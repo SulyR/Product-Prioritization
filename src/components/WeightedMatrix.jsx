@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Settings2 } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
@@ -14,6 +14,21 @@ export default function WeightedMatrix() {
     const [items, setItems] = useLocalStorage('pm-weighted-items', []);
     const [newItemTitle, setNewItemTitle] = useState('');
     const [showConfig, setShowConfig] = useState(false);
+
+    useEffect(() => {
+        const handleAddToFramework = (e) => {
+            const { item, targetFramework } = e.detail;
+            if (targetFramework === 'weighted') {
+                setItems(prev => [
+                    ...prev,
+                    { id: crypto.randomUUID(), title: item.title, scores: {} }
+                ]);
+            }
+        };
+
+        window.addEventListener('add-to-framework', handleAddToFramework);
+        return () => window.removeEventListener('add-to-framework', handleAddToFramework);
+    }, [setItems]);
 
     const calculateTotal = (itemScores) => {
         return criteria.reduce((total, crit) => {
