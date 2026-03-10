@@ -76,7 +76,7 @@ export default function MoscowBoard() {
 
     return (
         <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '24px', height: '100%' }}>
-            <div className="glass-panel" style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="glass-panel responsive-flex" style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <h2 style={{ marginBottom: '8px' }}>MoSCoW Prioritization</h2>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
@@ -84,28 +84,22 @@ export default function MoscowBoard() {
                     </p>
                 </div>
 
-                <form onSubmit={addItem} style={{ display: 'flex', gap: '12px' }}>
+                <form onSubmit={addItem} className="responsive-flex-wrap" style={{ display: 'flex', gap: '12px' }}>
                     <input
-                        className="input-field"
+                        className="input-field responsive-w-full"
                         type="text"
                         placeholder="New Initiative..."
                         value={newItemTitle}
                         onChange={(e) => setNewItemTitle(e.target.value)}
                         style={{ width: '300px' }}
                     />
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary responsive-w-full">
                         <Plus size={18} /> Add
                     </button>
                 </form>
             </div>
 
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: '20px',
-                alignItems: 'start',
-                minHeight: '500px'
-            }}>
+            <div className="grid-cols-4">
                 {CATEGORIES.map(category => (
                     <div
                         key={category.id}

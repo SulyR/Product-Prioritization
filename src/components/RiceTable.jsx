@@ -97,7 +97,7 @@ export default function RiceTable() {
 
     return (
         <div className="animate-fade-in glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div className="responsive-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
                     <h2 style={{ marginBottom: '8px' }}>RICE Scoring</h2>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '600px' }}>
@@ -107,22 +107,20 @@ export default function RiceTable() {
                     </p>
                 </div>
 
-                <form onSubmit={addItem} style={{ display: 'flex', gap: '12px', background: 'var(--bg-secondary)', padding: '16px', borderRadius: 'var(--border-radius-md)' }}>
-                    <div className="input-group" style={{ marginBottom: 0 }}>
-                        <input
-                            className="input-field"
-                            type="text"
-                            placeholder="Initiative Title..."
-                            value={newItemTitle}
-                            onChange={(e) => setNewItemTitle(e.target.value)}
-                            style={{ width: '250px' }}
-                        />
-                    </div>
-                    <button type="submit" className="btn btn-primary" style={{ alignSelf: 'center' }}>
+                <form onSubmit={addItem} className="responsive-flex-wrap" style={{ display: 'flex', gap: '12px', background: 'var(--bg-secondary)', padding: '16px', borderRadius: 'var(--border-radius-md)' }}>
+                    <input
+                        className="input-field responsive-w-full"
+                        type="text"
+                        placeholder="Initiative Title..."
+                        value={newItemTitle}
+                        onChange={(e) => setNewItemTitle(e.target.value)}
+                        style={{ width: '250px' }}
+                    />
+                    <button type="submit" className="btn btn-primary responsive-w-full" style={{ alignSelf: 'center' }}>
                         <Plus size={18} /> Add
                     </button>
                 </form>
-            </div>
+            </div >
 
             <div style={{ overflowX: 'auto', marginTop: '16px' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
