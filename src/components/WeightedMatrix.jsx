@@ -73,7 +73,7 @@ export default function WeightedMatrix() {
 
     return (
         <div className="animate-fade-in glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div className="responsive-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
                     <h2 style={{ marginBottom: '8px' }}>Weighted Scoring Matrix</h2>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '600px' }}>
@@ -81,7 +81,7 @@ export default function WeightedMatrix() {
                     </p>
                 </div>
 
-                <div style={{ display: 'flex', gap: '12px' }}>
+                <div className="responsive-flex-wrap" style={{ display: 'flex', gap: '12px' }}>
                     <button
                         className="btn btn-secondary"
                         onClick={() => setShowConfig(!showConfig)}
@@ -132,16 +132,16 @@ export default function WeightedMatrix() {
                 </div>
             )}
 
-            <form onSubmit={addItem} style={{ display: 'flex', gap: '12px', marginBottom: '8px' }}>
+            <form onSubmit={addItem} className="responsive-flex-wrap" style={{ display: 'flex', gap: '12px', marginBottom: '8px' }}>
                 <input
-                    className="input-field"
+                    className="input-field responsive-w-full"
                     type="text"
                     placeholder="New Initiative Title..."
                     value={newItemTitle}
                     onChange={(e) => setNewItemTitle(e.target.value)}
                     style={{ width: '300px' }}
                 />
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary responsive-w-full">
                     <Plus size={18} /> Add Initiative
                 </button>
             </form>
