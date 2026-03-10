@@ -7,6 +7,14 @@ export default function RiceTable() {
     const [newItemTitle, setNewItemTitle] = useState('');
     const [sortConfig, setSortConfig] = useState({ key: 'score', direction: 'desc' });
 
+    const calculateScore = (reach, impact, confidence, effort) => {
+        // RICE = (Reach * Impact * Confidence%) / Effort
+        // Assuming Confidence is a percentage (e.g., 80 for 80%)
+        if (!effort || effort <= 0) return 0;
+        const score = (reach * impact * (confidence / 100)) / effort;
+        return Number(score.toFixed(2));
+    };
+
     useEffect(() => {
         const handleAddToFramework = (e) => {
             const { item, targetFramework } = e.detail;
@@ -29,14 +37,6 @@ export default function RiceTable() {
         window.addEventListener('add-to-framework', handleAddToFramework);
         return () => window.removeEventListener('add-to-framework', handleAddToFramework);
     }, [setItems]);
-
-    const calculateScore = (reach, impact, confidence, effort) => {
-        // RICE = (Reach * Impact * Confidence%) / Effort
-        // Assuming Confidence is a percentage (e.g., 80 for 80%)
-        if (!effort || effort <= 0) return 0;
-        const score = (reach * impact * (confidence / 100)) / effort;
-        return Number(score.toFixed(2));
-    };
 
     const addItem = (e) => {
         e.preventDefault();
